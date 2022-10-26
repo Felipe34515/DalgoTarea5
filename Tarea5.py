@@ -1,17 +1,30 @@
+def cargar_grafo(ruta: str)->list:
+    archivo = open (ruta, "r")
+    linea = archivo.readline()
+    grafo = []
+    while linea != "":
+        lista = []
+        for n in linea.split("\t"):
+            lista.append(int(n))
+        grafo.append(lista)
+        linea = archivo.readline()
+
+    archivo.close()
+    return grafo
+
+grafo=(cargar_grafo("distances5.txt"))
 
 
-
-INF = 1111111111
 matriz = [[  0,   1, 3, 1],
 		  [  1,   0, 1, 1],
-					[  3,   1, 0,   2],
-					[1, 1, 2,   0]
+		  [  3,   1, 0,   2],
+		  [1, 1, 2,   0]
 					]
 #dijkstra           
 def dijkstra(grafo, vinicio):
 
-    listainstancias = [float("inf") for _ in range(len(grafo))]
-    v_visitados = [False for _ in range(len(grafo))]
+    listainstancias = [float("inf") for x in range(len(grafo))]
+    v_visitados = [False for x in range(len(grafo))]
     listainstancias[vinicio] = 0
     while True:
 
@@ -35,9 +48,11 @@ def dijkstra(grafo, vinicio):
         v_visitados[indice_corto] = True
    
 
-
-Parte1 = dijkstra(matriz,0)
-print(Parte1)
+def dijkstraCompleto(grafo):
+    lista=[]
+    for x in range(0,len(grafo)):
+        lista.append(dijkstra(grafo,x))
+    return lista
 
 #floydWarshall
 
@@ -50,14 +65,6 @@ def floydWarshall(n,graph): #n=no. of vertex
             for j in range(n): 
                 dist[i][j] = min(dist[i][j] ,dist[i][k]+ dist[k][j])
     return dist
-Parte2 = floydWarshall(len(matriz), matriz)
-print(Parte2)
-
-
-
-
-
-
 
 
 def bellman_ford(matrix, source):
@@ -85,6 +92,17 @@ def bellman_ford(matrix, source):
             
     return dist
 
-Parte3 = bellman_ford(matriz,0)
+def bellman_fordCompleto(grafo):
+    lista=[]
+    for x in range(0,len(grafo)):
+        lista.append(bellman_ford(grafo,x))
+    return lista
 
+Parte1 = dijkstraCompleto(grafo)
+print(Parte1)
+
+Parte2 = floydWarshall(len(grafo), grafo)
+print(Parte2)
+
+Parte3 = bellman_fordCompleto(grafo)
 print(Parte3)
