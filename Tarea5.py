@@ -1,6 +1,12 @@
 
 
 
+INF = 1111111111
+matriz = [[  0,   1, 3, 1],
+		  [  1,   0, 1, 1],
+					[  3,   1, 0,   2],
+					[1, 1, 2,   0]
+					]
 #dijkstra           
 def dijkstra(grafo, vinicio):
 
@@ -29,41 +35,27 @@ def dijkstra(grafo, vinicio):
         v_visitados[indice_corto] = True
    
 
-#hacer for
-#Parte1 = dijkstra(matrix,0)
+
+Parte1 = dijkstra(matriz,0)
+print(Parte1)
 
 #floydWarshall
-INF = 1000000000
-matriz = [
-					[  0,   1, 3, INF],
-					[  1,   0, 1, INF],
-					[  3,   1, 0,   2],
-					[INF, INF, 2,   0]
-					]
-
-def floyd_warshall(vertice, matriz):
-	for k in range(0, vertice):
-		for i in range(0, vertice):
-			for j in range(0, vertice):
-				matriz[i][j] = min(matriz[i][j], matriz[i][k] + matriz[k][j])
 
 
-Parte2 = floyd_warshall(4, matriz)
+INF = 99999
+def floydWarshall(n,graph): #n=no. of vertex
+    dist=graph
+    for k in range(n):
+        for i in range(n):
+            for j in range(n): 
+                dist[i][j] = min(dist[i][j] ,dist[i][k]+ dist[k][j])
+    return dist
+Parte2 = floydWarshall(len(matriz), matriz)
+print(Parte2)
 
 
 
 
-
-
-felipe = [[0, 4, 0, 0, 0, 0, 0, 8, 0],
-               [4, 0, 8, 0, 0, 0, 0, 11, 0],
-               [0, 8, 0, 7, 0, 4, 0, 0, 2],
-               [0, 0, 7, 0, 9, 14, 0, 0, 0],
-               [0, 0, 0, 9, 0, 10, 0, 0, 0],
-               [0, 0, 4, 14, 10, 0, 2, 0, 0],
-               [0, 0, 0, 0, 0, 2, 0, 1, 6],
-               [8, 11, 0, 0, 0, 0, 1, 0, 7],
-               [0, 0, 2, 0, 0, 0, 6, 7, 0]]
 
 
 
@@ -93,6 +85,6 @@ def bellman_ford(matrix, source):
             
     return dist
 
-Parte3 = bellman_ford(felipe,0)
+Parte3 = bellman_ford(matriz,0)
 
 print(Parte3)
