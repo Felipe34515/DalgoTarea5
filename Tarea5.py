@@ -1,11 +1,31 @@
+import time 
+def cargar_grafo(ruta: str)->list:
+    archivo = open (ruta, "r")
+    linea = archivo.readline()
+    grafo = []
+    while linea != "":
+        lista = []
+        for n in linea.split("\t"):
+            lista.append(int(n))
+        grafo.append(lista)
+        linea = archivo.readline()
+
+    archivo.close()
+    return grafo
+
+grafo=(cargar_grafo("distances5.txt"))
 
 
-
+matriz = [[  0,   1, 3, 1],
+		  [  1,   0, 1, 1],
+		  [  3,   1, 0,   2],
+		  [1, 1, 2,   0]
+					]
 #dijkstra           
 def dijkstra(grafo, vinicio):
 
-    listainstancias = [float("inf") for _ in range(len(grafo))]
-    v_visitados = [False for _ in range(len(grafo))]
+    listainstancias = [float("inf") for x in range(len(grafo))]
+    v_visitados = [False for x in range(len(grafo))]
     listainstancias[vinicio] = 0
     while True:
 
@@ -29,43 +49,23 @@ def dijkstra(grafo, vinicio):
         v_visitados[indice_corto] = True
    
 
-#hacer for
-#Parte1 = dijkstra(matrix,0)
+def dijkstraCompleto(grafo):
+    lista=[]
+    for x in range(0,len(grafo)):
+        lista.append(dijkstra(grafo,x))
+    return lista
 
 #floydWarshall
-INF = 1000000000
-matriz = [
-					[  0,   1, 3, INF],
-					[  1,   0, 1, INF],
-					[  3,   1, 0,   2],
-					[INF, INF, 2,   0]
-					]
-
-def floyd_warshall(vertice, matriz):
-	for k in range(0, vertice):
-		for i in range(0, vertice):
-			for j in range(0, vertice):
-				matriz[i][j] = min(matriz[i][j], matriz[i][k] + matriz[k][j])
 
 
-Parte2 = floyd_warshall(4, matriz)
-
-
-
-
-
-
-felipe = [[0, 4, 0, 0, 0, 0, 0, 8, 0],
-               [4, 0, 8, 0, 0, 0, 0, 11, 0],
-               [0, 8, 0, 7, 0, 4, 0, 0, 2],
-               [0, 0, 7, 0, 9, 14, 0, 0, 0],
-               [0, 0, 0, 9, 0, 10, 0, 0, 0],
-               [0, 0, 4, 14, 10, 0, 2, 0, 0],
-               [0, 0, 0, 0, 0, 2, 0, 1, 6],
-               [8, 11, 0, 0, 0, 0, 1, 0, 7],
-               [0, 0, 2, 0, 0, 0, 6, 7, 0]]
-
-
+INF = 99999
+def floydWarshall(n,graph): #n=no. of vertex
+    dist=graph
+    for k in range(n):
+        for i in range(n):
+            for j in range(n): 
+                dist[i][j] = min(dist[i][j] ,dist[i][k]+ dist[k][j])
+    return dist
 
 
 def bellman_ford(matrix, source):
@@ -93,6 +93,29 @@ def bellman_ford(matrix, source):
             
     return dist
 
-Parte3 = bellman_ford(felipe,0)
+def bellman_fordCompleto(grafo):
+    lista=[]
+    for x in range(0,len(grafo)):
+        lista.append(bellman_ford(grafo,x))
+    return lista
 
-print(Parte3)
+st=time.time()
+Parte1 = dijkstraCompleto(grafo)
+et=time.time()
+elapsed_time = et - st
+print('Execution time dijkstra:', elapsed_time*1000, 'Miliseconds')
+#print(Parte1)
+
+st=time.time()
+Parte2 = floydWarshall(len(grafo), grafo)
+et=time.time()
+elapsed_time = et - st
+print('Execution time floydWarshall:', elapsed_time*1000, 'Miliseconds')
+#print(Parte2)
+
+st=time.time()
+Parte3 = bellman_fordCompleto(grafo)
+et=time.time()
+elapsed_time = et - st
+print('Execution time bellman_ford:', elapsed_time*1000, 'Miliseconds')
+#print(Parte3)
