@@ -1,3 +1,4 @@
+import time 
 def cargar_grafo(ruta: str)->list:
     archivo = open (ruta, "r")
     linea = archivo.readline()
@@ -98,11 +99,23 @@ def bellman_fordCompleto(grafo):
         lista.append(bellman_ford(grafo,x))
     return lista
 
+st=time.time()
 Parte1 = dijkstraCompleto(grafo)
-print(Parte1)
+et=time.time()
+elapsed_time = et - st
+print('Execution time dijkstra:', elapsed_time*1000, 'Miliseconds')
+#print(Parte1)
 
+st=time.time()
 Parte2 = floydWarshall(len(grafo), grafo)
-print(Parte2)
+et=time.time()
+elapsed_time = et - st
+print('Execution time floydWarshall:', elapsed_time*1000, 'Miliseconds')
+#print(Parte2)
 
+st=time.time()
 Parte3 = bellman_fordCompleto(grafo)
-print(Parte3)
+et=time.time()
+elapsed_time = et - st
+print('Execution time bellman_ford:', elapsed_time*1000, 'Miliseconds')
+#print(Parte3)
