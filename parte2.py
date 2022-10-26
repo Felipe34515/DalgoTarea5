@@ -80,8 +80,11 @@ def bfsOfGraph(V, adj):
 
     print(conjuntos)"""
     
-
-
+######################
+###################
+## la funcion buena chimba 100% real no fake 4k re mela
+######################
+###################
 def subconjuntos (matriz):
     rta = []
     max = 0
