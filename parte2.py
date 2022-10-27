@@ -1,90 +1,21 @@
 from operator import sub
+import sys 
 
+def cargar_grafo()->list:
+    linea = sys.stdin.readline()
+    grafo = []
+    while linea != "":
+        lista = []
+        for n in linea.split("\t"):
+            lista.append(int(n))
+        grafo.append(lista)
+        linea = sys.stdin.readline()
 
-matriz = [[-1 ,-1, -1, 1, -1, -1, -1],
-           [-1, -1, -1, -1, -1, 1, -1 ],
-           [-1, -1, -1, 1, -1, -1, -1] ,
-           [1, -1, 1, -1, -1, -1, -1] ,
-           [-1, -1, -1, -1, -1, -1, 1] ,
-           [-1, 1, -1, -1, -1, -1, -1] ,
-           [-1, -1, -1, -1, 1, -1, -1] ,
-            ]
-
-
-
-
-def bfsOfGraph(V, adj):
- 
-    bfs_traversal = []
-    vis = [False]*V
-    for i in range(V):
- 
-        # To check if already visited
-        if (vis[i] == False):
-            q = []
-            vis[i] = True
-            q.append(i)
- 
-            # BFS starting from ith node
-            while (len(q) > 0):
-                g_node = q.pop(0)
- 
-                bfs_traversal.append(g_node)
-                for it in adj[g_node]:
-                    if (vis[it] == False):
-                        vis[it] = True
-                        q.append(it)
- 
-    return bfs_traversal
-
-
-"""def BDF(matriz):
-    visitados = []
-    rta = []
-    for k in range(0,len(matriz[0])):
-        for i in range(0,len(matriz[0])):
-            n = matriz[k][i]
-            if n == 1 and (i not in visitados):
-                subconjunto = [k]
-                if n == 1:
-                    subconjunto.append(i)
-                    for j in range(0,len(matriz[0])):
-                        m = matriz[i][j]
-                        if m == 1 and j not in subconjunto:
-                            subconjunto.append(j)
-                rta.append(subconjunto)            
-                        
-                    
-            visitados.append(i)
-        
-    return None"""
-
-"""def BDF2(matriz):
-    largo = len(matriz[0])
-    conjuntos = []
-    rta = []
+    return grafo
     
-    for i in range(0,largo):
-        for j in range(0,largo):
-            n = matriz[i][j]
-            if n == 1:
-                conjuntos.append([i, j])
+matriz = cargar_grafo()
 
-    for i in range(0,len(conjuntos)):
-        for j in range(0,len(conjuntos)):
-            print(conjuntos[i][0])
-            if i != j and conjuntos[i][0] in conjuntos[j] and conjuntos[i][1]  in conjuntos[j]:
-                conjuntos.pop(j)
-                
-                
 
-    print(conjuntos)"""
-    
-######################
-###################
-## la funcion buena chimba 100% real no fake 4k re mela
-######################
-###################
 def subconjuntos (matriz):
     rta = []
     max = 0
@@ -144,5 +75,5 @@ def verificar(matriz, rtaM, columna_verificar, nSubconjuntos):
     return rtaM 
 
 
-a = subconjuntos(matriz)
-print(a)
+respuesta = subconjuntos(matriz)
+print(respuesta)

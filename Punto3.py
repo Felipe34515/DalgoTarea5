@@ -40,3 +40,4 @@ colores = []
 for __ in range(0, len(grafo)):
     colores.append("BLANCO")
 print(es_ciclico())
+

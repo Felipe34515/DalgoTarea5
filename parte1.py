@@ -1,19 +1,19 @@
 import time 
-def cargar_grafo(ruta: str)->list:
-    archivo = open (ruta, "r")
-    linea = archivo.readline()
+import sys 
+
+def cargar_grafo()->list:
+    linea = sys.stdin.readline()
     grafo = []
     while linea != "":
         lista = []
         for n in linea.split("\t"):
             lista.append(int(n))
         grafo.append(lista)
-        linea = archivo.readline()
+        linea = sys.stdin.readline()
 
-    archivo.close()
     return grafo
 
-grafo=(cargar_grafo("distances5.txt"))
+grafo= cargar_grafo()
 
 
 matriz = [[  0,   1, 3, 1],
