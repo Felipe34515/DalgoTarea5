@@ -15,23 +15,20 @@ def cargar_grafo()->list:
 
 grafo= cargar_grafo()
 
-
-matriz = [[  0,   1, 3, 1],
-		  [  1,   0, 1, 1],
-		  [  3,   1, 0,   2],
-		  [1, 1, 2,   0]
-					]
 #dijkstra           
 def dijkstra(grafo, vinicio):
+    n=len(grafo)
+    inf=float("inf")
+    v = range(n)
 
-    listainstancias = [float("inf") for x in range(len(grafo))]
-    v_visitados = [False for x in range(len(grafo))]
+    listainstancias = [inf for x in v]
+    v_visitados = [False for x in v]
     listainstancias[vinicio] = 0
     while True:
 
-        distancia_corta = float("inf")
+        distancia_corta = inf
         indice_corto = -1
-        for i in range(len(grafo)):
+        for i in v:
            
             if listainstancias[i] < distancia_corta and not v_visitados[i]:
                 distancia_corta = listainstancias[i]
@@ -58,7 +55,7 @@ def dijkstraCompleto(grafo):
 #floydWarshall
 
 
-INF = 99999
+
 def floydWarshall(n,graph): #n=no. of vertex
     dist=graph
     for k in range(n):
@@ -70,14 +67,14 @@ def floydWarshall(n,graph): #n=no. of vertex
 
 def bellman_ford(matrix, source):
    
-    
-    n, inf = len(matrix), float("inf")
+    n=len(matrix)
+    inf=float("inf")
     v = range(n)
 
-    dist = [inf for _ in v]
+    dist = [inf for x in v]
     dist[source] = 0
     
-    for _ in range(n - 1):
+    for x in range(n - 1):
         for i in v:
             for j in v:
                 w = matrix[i][j]
@@ -103,19 +100,18 @@ st=time.time()
 Parte1 = dijkstraCompleto(grafo)
 et=time.time()
 elapsed_time = et - st
-print('Execution time dijkstra:', elapsed_time*1000, 'Miliseconds')
-#print(Parte1)
+print('Execution time dijkstra:', elapsed_time*10000, 'Miliseconds')
+
 
 st=time.time()
 Parte2 = floydWarshall(len(grafo), grafo)
 et=time.time()
 elapsed_time = et - st
-print('Execution time floydWarshall:', elapsed_time*1000, 'Miliseconds')
-#print(Parte2)
+print('Execution time floydWarshall:', elapsed_time*10000, 'Miliseconds')
+
 
 st=time.time()
 Parte3 = bellman_fordCompleto(grafo)
 et=time.time()
 elapsed_time = et - st
-print('Execution time bellman_ford:', elapsed_time*1000, 'Miliseconds')
-#print(Parte3)
+print('Execution time bellman_ford:', elapsed_time*10000, 'Miliseconds')
