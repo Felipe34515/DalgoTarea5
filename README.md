@@ -17,5 +17,5 @@ Pasos cargar los archivos:
   después poner para probar los respectivos puntos estas lineas de forma individual:
 
     parte1.py <distances5.txt> salidaParte1.out
-    parte2.py <distances5.txt> salidaParte2.out
+    parte2.py <distancesDisconnected.txt> salidaParte2.out
     parte3.py <distances5.txt> salidaParte3.out
