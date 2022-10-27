@@ -56,7 +56,7 @@ def dijkstraCompleto(grafo):
 
 
 
-def floydWarshall(n,graph): #n=no. of vertex
+def floydWarshall(n,graph):
     dist=graph
     for k in range(n):
         for i in range(n):

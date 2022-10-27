@@ -1,4 +1,3 @@
-from operator import sub
 import sys 
 
 def cargar_grafo()->list:
